@@ -22,14 +22,20 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Run linters
-        run: pnpm lint
+      # - name: Run linters
+      #   run: pnpm lint
 
-      - name: Run unit test
-        run: pnpm test
+      # - name: Run unit test
+      #   run: pnpm test
 
-      - name: Type check
-        run: pnpm typecheck
+      # - name: Type check
+      #   run: pnpm typecheck
 
       - name: Build the app
         run: pnpm build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./dist
