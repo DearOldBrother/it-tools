@@ -25,6 +25,12 @@ jobs:
       - name: Build the app
         run: pnpm build
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: dist/
+
   deploy:
     environment:
       name: github-pages
@@ -36,7 +42,11 @@ jobs:
       pages: write
       id-token: write
     steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
